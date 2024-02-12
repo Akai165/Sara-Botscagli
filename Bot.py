@@ -200,4 +200,4 @@ async def help_command(ctx):
     await ctx.send(embed=embed)
     
 # Insert your key here to let the bot work 
-bot.run('MTIwMDAyOTQ5NDU5Mzk4MjQ2NA.GW6YOD.01Z-3KhEr-O17kDMlniWJdIZ3LLWgZn6Eru9k8')
+bot.run('TOKEN')
