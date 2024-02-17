@@ -46,7 +46,21 @@ async def kick(ctx, member:discord.Member, *,reason=None):
     if reason == None:
         reason = "This user was kicked by " + ctx.message.author.name
     await member.kick(reason=reason)
+    
+@bot.command(name="disconnect", help="Disconnect a user from a vocal channel")
+async def disconnect(ctx, user_mention: discord.Member):
+    if ctx.author.voice:
+        if user_mention.voice:
+            await user_mention.move_to(None)
+            await ctx.send(f'{user_mention.display_name} fuori dalla mia palude')
+        else:
+            await ctx.send(f'{user_mention.display_name} is not in a vocal channel')
+    else:
+        await ctx.send('You have to been in a vocal channel to use this command')
 
+
+
+#MUTE NOT WORKING, PROBLEMS WITH DELTA TIME
 @bot.command()
 @commands.has_any_role("Moderator", "Administrator", "Owner", "Pagato Normalmente", "I sottopagati")
 async def mute(ctx, member:discord.Member, timelimit):
@@ -89,6 +103,8 @@ async def mute(ctx, member:discord.Member, timelimit):
             newtime = datetime.timedelta(weeks=int(gettime))
             await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
 
+
+#I GUESS IS WORKING
 @bot.command()
 @commands.has_any_role("Moderator", "Administrator", "Owner", "Pagato Normalmente", "I sottopagati")
 async def unmute(ctx, member:discord.Member):
@@ -199,5 +215,5 @@ async def help_command(ctx):
 
     await ctx.send(embed=embed)
     
-# Insert your key here to let the bot work 
-bot.run('TOKEN')
+
+bot.run('MTIwMDAyOTQ5NDU5Mzk4MjQ2NA.GMnR1Q.wWx1Pcd6bzz8XGz-0WE7lMMfzuJHQG2-QjS4WU')
